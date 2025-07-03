@@ -3,6 +3,7 @@ package genericPackage;
 import java.io.IOException;
 import java.time.Duration;
 
+
 import org.apache.poi.EncryptedDocumentException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -14,15 +15,22 @@ import org.testng.annotations.BeforeClass;
 
 import pomPackage.LoginPage;
 import pomPackage.WelcomePage;
+import utilities.Flib;
+import utilities.IAutoConstant;
+
+import org.apache.logging.log4j.LogManager; //Log4j
+import org.apache.logging.log4j.Logger; //Log4j
 
 public class BaseTest implements IAutoConstant {
 
 	public static WebDriver driver;
-
+	public Logger logger; //Log4j
 	@BeforeClass
 	public void browserSetup() throws IOException {
+		
+		logger=LogManager.getLogger(this.getClass());
 		Flib flib = new Flib();
-		String browservalue = flib.readPropertyData(MAIN_PROP_PATH, "chrome");
+		String browservalue = flib.readPropertyData(MAIN_PROP_PATH, "edge");
 		String url = flib.readPropertyData(MAIN_PROP_PATH, "url");
 
 		if (browservalue.equalsIgnoreCase("chrome")) {
